@@ -1,5 +1,9 @@
 <?php
 
+namespace Valet\Drivers\Custom;
+
+use Valet\Drivers\ValetDriver;
+
 class PrestaShopValetDriver extends ValetDriver
 {
     /**
@@ -11,7 +15,7 @@ class PrestaShopValetDriver extends ValetDriver
      *
      * @return bool
      */
-    public function serves($sitePath, $siteName, $uri)
+    public function serves(string $sitePath, string $siteName, string $uri) :bool
     {
         return file_exists($sitePath . '/classes/PrestaShopAutoload.php');
     }
@@ -25,7 +29,7 @@ class PrestaShopValetDriver extends ValetDriver
      *
      * @return string|false
      */
-    public function isStaticFile($sitePath, $siteName, $uri)
+    public function isStaticFile(string $sitePath, string $siteName, string $uri) :string
     {
         // Basic static file
         if (is_file($staticFilePath = "{$sitePath}/{$uri}")) {
@@ -114,7 +118,7 @@ class PrestaShopValetDriver extends ValetDriver
      *
      * @return string
      */
-    public function frontControllerPath($sitePath, $siteName, $uri)
+    public function frontControllerPath(string $sitePath, string $siteName, string $uri) :string
     {
         //Legacy URls
         $parts = explode('/', $uri);
